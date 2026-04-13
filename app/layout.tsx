@@ -25,19 +25,19 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   {/* Base Image */}
   <img 
     src="/cloudz.jpg" 
-    className="absolute inset-0 w-full h-full object-cover" 
+    className="absolute inset-0 w-full h-full " 
     alt="background"
   />
   
   {/* Middle Pillar */}
   <img 
     src="/cloudySky.jpg" 
-    className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-full w-full object-cover opacity-80 pointer-events-none" 
+    className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-full w-full  opacity-80 pointer-events-none" 
     alt="middle sky pillar"
   />
 
   {/* Dark Overlay */}
-  <div className="absolute inset-0 bg-slate-950/40" />
+  <div className="absolute inset-0  " />
 </div>
 
         {/* CONTENT LAYER */}

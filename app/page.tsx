@@ -152,16 +152,16 @@ export default function HomePage() {
 
         {/* Search & Set Home Section */}
        <section className="max-w-md mx-auto mb-12 px-2"> {/* Added small padding for mobile edges */}
-  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-900/10 border border-white/10 rounded-3xl">
+  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-700/42 border border-white/10 rounded-3xl min-w-[700px]">
     <input 
       type="text" 
       placeholder="Search city :]" 
       value={city}
       onChange={(e) => setCity(e.target.value)}
       onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
-      className="flex-1 min-w-[120px] bg-transparent px-3 py-2 outline-none text-white" 
+      className="flex-1 min-w-[120px]  px-3 py-2 outline-none text-white ring-blue" 
     />
-    <div className="flex gap-2 w-full sm:w-auto"> {/* Group buttons so they wrap together if needed */}
+    <div className="flex gap-2  min-w-[270px]"> {/* Group buttons so they wrap together if needed */}
       <button 
         onClick={() => getWeather(city)}
         className="flex-1 sm:flex-none bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-md"
@@ -172,14 +172,14 @@ export default function HomePage() {
       {user ? (
         <button 
           onClick={async () => { /* ... existing logic ... */ }}
-          className="flex-1 sm:flex-none bg-blue-600 px-3 py-2 rounded-2xl hover:bg-blue-500 transition font-bold text-md whitespace-nowrap"
+          className=" min-w-[170px] sm:flex-none bg-blue-600 px-3 py-2 rounded-2xl hover:bg-blue-500 transition font-bold text-md whitespace-nowrap"
         >
           Set as Home
         </button>
       ) : (
         <button 
           onClick={() => setShowAuthModal(true)}
-          className="text-slate-400 px-3 text-xs font-bold hover:text-white transition max-w-[100px] leading-tight"
+          className="text-white px-3 text-sm font-bold hover:text-white transition max-w-[140px] "
         >
           Sign in to set home
         </button>
@@ -198,15 +198,19 @@ export default function HomePage() {
                 <div 
                   key={day.date} 
                   onClick={() => setSelectedDayIndex(index)}
-                  className={`min-w-[150px] p-6 rounded-3xl border transition-all cursor-pointer backdrop-blur-sm ${
+                  className={`min-w-[190px] p-6 rounded-3xl border transition-all cursor-pointer backdrop-blur-sm ${
                     selectedDayIndex === index ? 'bg-blue-600/20 border-blue-400' : 'bg-slate-900/40 border-white/5'
                   }`}
                 >
                   <p className="text-blue-200 text-xs font-black uppercase tracking-tighter">
                     {index === 0 ? "Today" : dayName}
                   </p>
+                  
+                  <div className="flex flex-col justify-center items-center">
                   <img src={`https:${day.day.condition.icon}`} className="w-12 h-12 my-2" alt="icon" />
-                  <p className="text-2xl font-bold">{Math.round(day.day.avgtemp_c)}C°</p>
+                  <p className="text-2xl w-15 font-bold">{Math.round(day.day.avgtemp_c)}C°</p>
+                  </div>
+                
                   <p className="text-[17px] text-slate-400 truncate">{day.day.condition.text}</p>
                 </div>
               );
@@ -221,10 +225,10 @@ export default function HomePage() {
     <h3 className="text-white font-bold text-md uppercase tracking-widest mb-6 ml-2">
       Hourly Forecast
     </h3>
-    <div 
-      onMouseDown={handleMouseDown}
-      className="w-full flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none snap-x"
-    >
+   <div 
+  onMouseDown={handleMouseDown}
+  className="w-full flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none scroll-smooth touch-pan-x snap-x snap-proximity md:snap-none"
+>
       {weather.forecast.forecastday[selectedDayIndex].hour
         .filter((hr: any) => {
           if (selectedDayIndex !== 0) return true;
