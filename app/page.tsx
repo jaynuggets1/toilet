@@ -214,9 +214,10 @@ export default function HomePage() {
           </section>
         )}
 
-       {/* Hourly Forecast */}
+       
+{/* Hourly Forecast */}
 {weather && (
-  <section className="mt-12 w-full overflow-hidden"> {/* Prevent vertical leaking */}
+  <section className="mt-12 w-full overflow-hidden">
     <h3 className="text-white font-bold text-md uppercase tracking-widest mb-6 ml-2">
       Hourly Forecast
     </h3>
@@ -225,13 +226,26 @@ export default function HomePage() {
       className="w-full flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none snap-x"
     >
       {weather.forecast.forecastday[selectedDayIndex].hour
-        .filter((hr: any) => { /* ... logic ... */ })
+        .filter((hr: any) => {
+          if (selectedDayIndex !== 0) return true;
+          return new Date(hr.time).getTime() > new Date().getTime() - 3600000;
+        })
         .map((hr: any) => (
           <div 
             key={hr.time} 
-            className="min-w-[90px] flex-shrink-0 p-4 bg-slate-900/25 border border-white/5 rounded-2xl flex flex-col items-center pointer-events-none backdrop-blur-sm snap-center"
+            className="min-w-[90px] flex-shrink-0 p-4 bg-slate-900/40 border border-white/10 rounded-2xl flex flex-col items-center pointer-events-none backdrop-blur-md snap-center"
           >
-            {/* ... card content ... */}
+            <p className="text-[17px] text-blue-200 font-bold">
+              {hr.time.split(' ')[1]}
+            </p>
+            <img 
+              src={`https:${hr.condition.icon}`} 
+              className="w-10 h-10 my-1" 
+              alt="icon" 
+            />
+            <p className="text-lg font-bold">
+              {Math.round(hr.temp_c)}°
+            </p>
           </div>
         ))}
     </div>
