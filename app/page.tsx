@@ -125,7 +125,7 @@ export default function HomePage() {
 
   return (
     <div className="z-10 min-h-screen text-white ">
-      <main className="max-w-6xl mx-auto px-6">
+      <main className="max-w-6xl mx-auto px-1">
         {/* Navigation Bar */}
         <nav className="flex justify-between items-center py-7">
           <div className="text-4xl font-black bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
@@ -151,54 +151,62 @@ export default function HomePage() {
         </nav>
 
         {/* Search & Set Home Section */}
-       <section className="max-w-md mx-auto mb-12 px-2"> {/* Added small padding for mobile edges */}
-  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-700/42 border border-white/10 rounded-3xl min-w-[370px]">
+{/* Search & Set Home Section */}
+{/* Search & Set Home Section */}
+<section className="max-w-md w-full mx-auto mb-12 px-2"> 
+  <div className="flex items-center gap-1 p-1.5 bg-gray-900/25 border border-white/10 rounded-2xl h-12">
+    
+    {/* 1. The Search Icon or Label (Optional, saves space) */}
+
+    {/* 2. The Input: We use min-w-0 so it CAN shrink very small if the screen is tiny */}
     <input 
       type="text" 
-      placeholder="Search city :]" 
+      placeholder="City..." 
       value={city}
       onChange={(e) => setCity(e.target.value)}
       onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
-      className="flex-1 min-w-[66px]  px-3 py-2 outline-none text-white ring-blue" 
+      className="flex-1 min-w-0 bg-transparent px-2 py-1 outline-none text-white text-lg placeholder:text-white" 
     />
-    <div className="flex gap-2  min-w-[70px]"> {/* Group buttons so they wrap together if needed */}
+
+    {/* 3. The Buttons: We use 'shrink-0' so they NEVER move or disappear */}
+    <div className="flex shrink-0 gap-1">
       <button 
         onClick={() => getWeather(city)}
-        className="flex-1 sm:flex-none bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-md"
+        className="bg-slate-800/50 px-3 py-1.5 rounded-xl hover:bg-slate-700 transition font-bold text-sm"
       >
-        Search
+        search
       </button>
       
       {user ? (
         <button 
-          onClick={async () => { /* ... existing logic ... */ }}
-          className=" min-w-[170px] sm:flex-none bg-blue-600 px-3 py-2 rounded-2xl hover:bg-blue-500 transition font-bold text-md whitespace-nowrap"
+          onClick={async () => { /* your logic */ }}
+          className="bg-blue-600 px-3 py-1.5 rounded-xl hover:bg-blue-500 transition font-bold text-sm whitespace-nowrap"
         >
-          Set as Home
+          HOME
         </button>
       ) : (
         <button 
           onClick={() => setShowAuthModal(true)}
-          className="text-white px-3 text-sm font-bold hover:text-white transition max-w-[140px] "
+          className="bg-blue-600/10 text-blue-300 px-3 py-1.5 rounded-xl text-[17px] font-bold border border-blue-500/30 uppercase"
         >
-          Sign in to set home
+          set as home
         </button>
       )}
     </div>
   </div>
 </section>
-
-        {/* 3-Day Forecast Cards */}
-        {weather && (
-          <section className="flex gap-4 justify-center overflow-x-auto no-scrollbar pb-4">
-            {weather.forecast.forecastday.map((day: any, index: number) => {
+      {/* 3-Day Forecast Cards */}
+{weather && (
+  <section className="flex w-full gap-4 overflow-x-auto no-scrollbar pb-4 px-4 sm:justify-center">
+    {weather.forecast.forecastday.map((day: any, index: number) => {
+      // ... rest of your map logic
               const date = new Date(day.date + 'T00:00:00');
               const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
               return (
                 <div 
                   key={day.date} 
                   onClick={() => setSelectedDayIndex(index)}
-                  className={`min-w-[190px] p-6 rounded-3xl border transition-all cursor-pointer backdrop-blur-sm ${
+                  className={`min-w-[170px] p-6 rounded-3xl border transition-all cursor-pointer backdrop-blur-sm ${
                     selectedDayIndex === index ? 'bg-blue-600/20 border-blue-400' : 'bg-slate-900/40 border-white/5'
                   }`}
                 >

@@ -37,11 +37,11 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   />
 
   {/* Dark Overlay */}
-  <div className="absolute inset-0  " />
+  <div className="absolute inset-0 " />
 </div>
 
         {/* CONTENT LAYER */}
-        <div className="max-w-5xl mx-auto px-4 relative min-h-screen z-10">
+        <div className="max-w-5xl mx-auto px-1 relative min-h-screen z-10">
           <main>{children}</main>
         </div>
       </body>
