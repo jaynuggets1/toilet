@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   {/* 2. Middle Pillar: Full height, ~1000px wide, centered */}
   <img 
     src="/cloudySky.jpg" 
-     className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-screen w-full object-cover  pointer-events-none" 
+    className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-screen w-full object-cover  pointer-events-none" 
     alt="middle sky pillar"
   />
 

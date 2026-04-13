@@ -133,7 +133,7 @@ export default function HomePage() {
 if (user) {
     return (
       <div className="z-10 min-h-screen text-white">
-        <main className="max-w-6xl mx-auto p-6">
+        <main className="max-w-6xl mx-auto ">
           {/* Navigation Bar */}
           <nav className="flex justify-between items-center py-7">
             <div className="text-4xl font-black bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
@@ -152,7 +152,7 @@ if (user) {
             <div className="flex gap-2 p-2 bg-gray-900/10 border border-white/10 rounded-3xl ">
               <input 
                 type="text" 
-                placeholder="Search city..." 
+                placeholder="Search city :]" 
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
