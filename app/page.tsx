@@ -65,11 +65,15 @@ export default function HomePage() {
       } else {
         setWeather(data);
         setCity(cityName);
+        setCity(data.location.name);
       }
     } catch (err) {
       setErrorMessage("Network error.");
     }
   };
+
+
+
 
   // 3. Auth Handlers
   const handleSignUp = async (e: React.FormEvent) => {
@@ -177,11 +181,14 @@ if (user) {
               </button>
             </div>
             {errorMessage && <p className="text-red-400 text-xs mt-2 ml-4">{errorMessage}</p>}
+
           </section>
+
 
           {/* 3-Day Forecast Cards */}
           {weather && (
             <section className="flex gap-4 justify-center overflow-x-auto no-scrollbar pb-4">
+
               {weather.forecast.forecastday.map((day: any, index: number) => {
                 const date = new Date(day.date + 'T00:00:00');
                 const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
@@ -197,7 +204,7 @@ if (user) {
                       {index === 0 ? "Today" : dayName}
                     </p>
                     <img src={`https:${day.day.condition.icon}`} className="w-12 h-12 my-2" alt="icon" />
-                    <p className="text-2xl font-bold">{Math.round(day.day.avgtemp_c)}°</p>
+                    <p className="text-2xl font-bold">{Math.round(day.day.avgtemp_c)}C°</p>
                     <p className="text-[10px] text-slate-400 truncate">{day.day.condition.text}</p>
                   </div>
                 );
@@ -224,7 +231,7 @@ if (user) {
                     <div key={hr.time} className="min-w-[90px] p-4 bg-slate-900/25 border border-white/5 rounded-2xl flex flex-col items-center pointer-events-none backdrop-blur-sm">
                       <p className="text-[10px] text-blue-200 font-bold">{hr.time.split(' ')[1]}</p>
                       <img src={`https:${hr.condition.icon}`} className="w-10 h-10 my-1" alt="icon" />
-                      <p className="text-lg font-bold">{Math.round(hr.temp_c)}°</p>
+                      <p className="text-lg font-bold">{Math.round(hr.temp_c)}C°</p>
                     </div>
                   ))}
               </div>
