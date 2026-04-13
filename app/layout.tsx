@@ -21,18 +21,18 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
       {/* Added bg-slate-950 as a fallback color */}
 <body className={`${gameFont.className}  text-slate-300 relative min-h-screen bg-slate-950`}>        
       {/* BACKGROUND LAYER */}
-<div className="fixed inset-0 -z-10 overflow-hidden">
+<div className=" inset-0  overflow-hidden">
   {/* 1. Base Image: Covers the entire screen behind everything */}
   <img 
     src="/cloudz.jpg" 
-    className="absolute inset-0 w-full h-full object-cover " 
+    className="absolute inset-0 w-full h-full  " 
     alt="background"
   />
   
   {/* 2. Middle Pillar: Full height, ~1000px wide, centered */}
   <img 
     src="/cloudySky.jpg" 
-    className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-screen w-full object-cover  pointer-events-none" 
+    className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-screen w-full   pointer-events-none" 
     alt="middle sky pillar"
   />
 
