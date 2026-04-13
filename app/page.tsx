@@ -152,7 +152,7 @@ export default function HomePage() {
 
         {/* Search & Set Home Section */}
        <section className="max-w-md mx-auto mb-12 px-2"> {/* Added small padding for mobile edges */}
-  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-700/42 border border-white/10 rounded-3xl min-w-[410px]">
+  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-700/42 border border-white/10 rounded-3xl min-w-[370px]">
     <input 
       type="text" 
       placeholder="Search city :]" 
