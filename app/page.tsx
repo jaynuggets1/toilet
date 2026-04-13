@@ -140,10 +140,10 @@ if (user) {
               RAINYSKY
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-slate-400 text-sm">
+              <span className="text-slate-400 text-md">
                 {user.user_metadata?.display_name || user.email}
               </span>
-              <button onClick={handleLogout} className="text-xs text-red-400 font-bold">Logout</button>
+              <button onClick={handleLogout} className="text-md text-red-400 font-bold">Logout</button>
             </div>
           </nav>
 
@@ -156,11 +156,11 @@ if (user) {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
-                className="flex-1 bg-transparent px-1 py-2 outline-none text-white"
+                className="flex-1 bg-transparent px-1 py-2 outline-none text-white "
               />
               <button 
                 onClick={() => getWeather(city)}
-                className="bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-sm"
+                className="bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-md"
               >
                 Search
               </button>
@@ -175,7 +175,7 @@ if (user) {
                     });
                   if (!error) alert(`🏠 ${weather.location.name} is now your home city!`);
                 }}
-                className="bg-blue-600 px-3 rounded-2xl hover:bg-blue-500 transition font-bold text-xs whitespace-nowrap"
+                className="bg-blue-600 px-3 rounded-2xl hover:bg-blue-500 transition font-bold text-md whitespace-nowrap"
               >
                 Set as Home
               </button>
@@ -196,7 +196,7 @@ if (user) {
                   <div 
                     key={day.date} 
                     onClick={() => setSelectedDayIndex(index)}
-                    className={`min-w-[150px] p-6 rounded-3xl border transition-all cursor-pointer backdrop-blur-sm ${
+                    className={` w-61 p-6 rounded-3xl border transition-all cursor-pointer backdrop-blur-sm ${
                       selectedDayIndex === index ? 'bg-blue-600/20 border-blue-400' : 'bg-slate-900/40 border-white/5'
                     }`}
                   >
@@ -205,7 +205,7 @@ if (user) {
                     </p>
                     <img src={`https:${day.day.condition.icon}`} className="w-12 h-12 my-2" alt="icon" />
                     <p className="text-2xl font-bold">{Math.round(day.day.avgtemp_c)}C°</p>
-                    <p className="text-[10px] text-slate-400 truncate">{day.day.condition.text}</p>
+                    <p className="text-[17px] text-slate-400 truncate">{day.day.condition.text}</p>
                   </div>
                 );
               })}
@@ -214,13 +214,13 @@ if (user) {
 
           {/* Hourly Breakdown */}
           {weather && (
-            <section className="mt-12">
-              <h3 className="text-white font-bold text-xs uppercase tracking-widest mb-6 ml-2">
+            <section className="mt-12 w-full">
+              <h3 className="text-white font-bold text-md uppercase tracking-widest mb-6 ml-2">
                 Hourly Forecast
               </h3>
               <div 
                 onMouseDown={handleMouseDown}
-                className="flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none"
+                className="w-full flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none"
               >
                 {weather.forecast.forecastday[selectedDayIndex].hour
                   .filter((hr: any) => {
@@ -229,7 +229,7 @@ if (user) {
                   })
                   .map((hr: any) => (
                     <div key={hr.time} className="min-w-[90px] p-4 bg-slate-900/25 border border-white/5 rounded-2xl flex flex-col items-center pointer-events-none backdrop-blur-sm">
-                      <p className="text-[10px] text-blue-200 font-bold">{hr.time.split(' ')[1]}</p>
+                      <p className="text-[17px] text-blue-200 font-bold">{hr.time.split(' ')[1]}</p>
                       <img src={`https:${hr.condition.icon}`} className="w-10 h-10 my-1" alt="icon" />
                       <p className="text-lg font-bold">{Math.round(hr.temp_c)}C°</p>
                     </div>

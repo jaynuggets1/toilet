@@ -9,7 +9,12 @@ const config: Config = {
   ],
   theme: {
     //theme is where we customize colors fonts sizes and other style stuff
-    extend: {}, //extend lets us add our own custom values on top of tailwinds default stuff without overriding everything
+    extend: {
+      fontFamily: {
+        // This forces 'font-sans' (the default) to use Quicksand
+        sans: ['Quicksand', 'sans-serif'],
+      },
+    }, //extend lets us add our own custom values on top of tailwinds default stuff without overriding everything
   },
   plugins: [], //plugins are optional extra features we can add to tailwind - we don't have any right now but we can add them here later if we need em
 };

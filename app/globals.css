@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+
+
+
+@layer base {
+  html {
+    /* Pixel fonts usually need to be at least 18px or 20px to feel 'normal' */
+    font-size: 22px; 
+  }}
+
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -9,3 +19,4 @@
     scrollbar-width: none;
   }
 }
+

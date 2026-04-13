@@ -1,9 +1,12 @@
 import "./globals.css";
 import { Inter } from 'next/font/google';
 import { createClient } from "@/utils/supabase/client"; //i import my supabase client
+import { VT323 } from 'next/font/google';
 
-
-
+const gameFont = VT323({ 
+  weight: '400',
+  subsets: ['latin'],
+});
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,8 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
         <title>rainysky</title>
       </head>
       {/* Added bg-slate-950 as a fallback color */}
-      <body className={`${inter.className} text-white relative min-h-screen bg-slate-950`}>
-        
+<body className={`${gameFont.className}  text-slate-300 relative min-h-screen bg-slate-950`}>        
       {/* BACKGROUND LAYER */}
 <div className="fixed inset-0 -z-10 overflow-hidden">
   {/* 1. Base Image: Covers the entire screen behind everything */}
@@ -30,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   {/* 2. Middle Pillar: Full height, ~1000px wide, centered */}
   <img 
     src="/cloudySky.jpg" 
-    className="absolute top-0 left-1/2 -translate-x-1/2 h-screen w-full max-w-[1000px] object-cover  pointer-events-none" 
+     className="absolute max-w-6xl top-0 left-1/2 -translate-x-1/2 h-screen w-full object-cover  pointer-events-none" 
     alt="middle sky pillar"
   />
 
