@@ -152,16 +152,16 @@ export default function HomePage() {
 
         {/* Search & Set Home Section */}
        <section className="max-w-md mx-auto mb-12 px-2"> {/* Added small padding for mobile edges */}
-  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-700/42 border border-white/10 rounded-3xl min-w-[700px]">
+  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-700/42 border border-white/10 rounded-3xl min-w-[410px]">
     <input 
       type="text" 
       placeholder="Search city :]" 
       value={city}
       onChange={(e) => setCity(e.target.value)}
       onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
-      className="flex-1 min-w-[120px]  px-3 py-2 outline-none text-white ring-blue" 
+      className="flex-1 min-w-[66px]  px-3 py-2 outline-none text-white ring-blue" 
     />
-    <div className="flex gap-2  min-w-[270px]"> {/* Group buttons so they wrap together if needed */}
+    <div className="flex gap-2  min-w-[70px]"> {/* Group buttons so they wrap together if needed */}
       <button 
         onClick={() => getWeather(city)}
         className="flex-1 sm:flex-none bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-md"
