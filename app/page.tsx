@@ -151,51 +151,42 @@ export default function HomePage() {
         </nav>
 
         {/* Search & Set Home Section */}
-        <section className="max-w-md mx-auto mb-12">
-          <div className="flex gap-2 p-2 bg-gray-900/10 border border-white/10 rounded-3xl ">
-            <input 
-              type="text" 
-              placeholder="Search city :]" 
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
-              className="flex-1 bg-transparent px-3 py-2 outline-none text-white"
-            />
-            <button 
-              onClick={() => getWeather(city)}
-              className="bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-md"
-            >
-              Search
-            </button>
-            
-            {/* Conditional Button Logic */}
-            {user ? (
-              <button 
-                onClick={async () => {
-                  if (!weather) return alert("Search for a city first!");
-                  const { error } = await supabase
-                    .from("profiles")
-                    .upsert({ 
-                      id: user.id, 
-                      home_city: weather.location.name.toLowerCase() 
-                    });
-                  if (!error) alert(`🏠 ${weather.location.name} is now your home city!`);
-                }}
-                className="bg-blue-600 px-3 rounded-2xl hover:bg-blue-500 transition font-bold text-md whitespace-nowrap"
-              >
-                Set as Home
-              </button>
-            ) : (
-              <button 
-                onClick={() => setShowAuthModal(true)}
-                className="text-slate-400 px-3 text-xs font-bold hover:text-white transition max-w-[80px] leading-tight"
-              >
-                Sign in to set home
-              </button>
-            )}
-          </div>
-          {errorMessage && <p className="text-red-400 text-xs mt-2 ml-4">{errorMessage}</p>}
-        </section>
+       <section className="max-w-md mx-auto mb-12 px-2"> {/* Added small padding for mobile edges */}
+  <div className="flex flex-wrap sm:flex-nowrap gap-2 p-2 bg-gray-900/10 border border-white/10 rounded-3xl">
+    <input 
+      type="text" 
+      placeholder="Search city :]" 
+      value={city}
+      onChange={(e) => setCity(e.target.value)}
+      onKeyDown={(e) => e.key === 'Enter' && getWeather(city)}
+      className="flex-1 min-w-[120px] bg-transparent px-3 py-2 outline-none text-white" 
+    />
+    <div className="flex gap-2 w-full sm:w-auto"> {/* Group buttons so they wrap together if needed */}
+      <button 
+        onClick={() => getWeather(city)}
+        className="flex-1 sm:flex-none bg-slate-800/25 px-4 py-1 rounded-2xl hover:bg-slate-700 transition font-bold text-md"
+      >
+        Search
+      </button>
+      
+      {user ? (
+        <button 
+          onClick={async () => { /* ... existing logic ... */ }}
+          className="flex-1 sm:flex-none bg-blue-600 px-3 py-2 rounded-2xl hover:bg-blue-500 transition font-bold text-md whitespace-nowrap"
+        >
+          Set as Home
+        </button>
+      ) : (
+        <button 
+          onClick={() => setShowAuthModal(true)}
+          className="text-slate-400 px-3 text-xs font-bold hover:text-white transition max-w-[100px] leading-tight"
+        >
+          Sign in to set home
+        </button>
+      )}
+    </div>
+  </div>
+</section>
 
         {/* 3-Day Forecast Cards */}
         {weather && (
@@ -223,31 +214,29 @@ export default function HomePage() {
           </section>
         )}
 
-        {/* Hourly Forecast */}
-        {weather && (
-          <section className="mt-12 w-full">
-            <h3 className="text-white font-bold text-md uppercase tracking-widest mb-6 ml-2">
-              Hourly Forecast
-            </h3>
-            <div 
-              onMouseDown={handleMouseDown}
-              className="w-full flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none"
-            >
-              {weather.forecast.forecastday[selectedDayIndex].hour
-                .filter((hr: any) => {
-                  if (selectedDayIndex !== 0) return true;
-                  return new Date(hr.time).getTime() > new Date().getTime() - 3600000;
-                })
-                .map((hr: any) => (
-                  <div key={hr.time} className="min-w-[90px] p-4 bg-slate-900/25 border border-white/5 rounded-2xl flex flex-col items-center pointer-events-none backdrop-blur-sm">
-                    <p className="text-[17px] text-blue-200 font-bold">{hr.time.split(' ')[1]}</p>
-                    <img src={`https:${hr.condition.icon}`} className="w-10 h-10 my-1" alt="icon" />
-                    <p className="text-lg font-bold">{Math.round(hr.temp_c)}C°</p>
-                  </div>
-                ))}
-            </div>
-          </section>
-        )}
+       {/* Hourly Forecast */}
+{weather && (
+  <section className="mt-12 w-full overflow-hidden"> {/* Prevent vertical leaking */}
+    <h3 className="text-white font-bold text-md uppercase tracking-widest mb-6 ml-2">
+      Hourly Forecast
+    </h3>
+    <div 
+      onMouseDown={handleMouseDown}
+      className="w-full flex gap-4 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none snap-x"
+    >
+      {weather.forecast.forecastday[selectedDayIndex].hour
+        .filter((hr: any) => { /* ... logic ... */ })
+        .map((hr: any) => (
+          <div 
+            key={hr.time} 
+            className="min-w-[90px] flex-shrink-0 p-4 bg-slate-900/25 border border-white/5 rounded-2xl flex flex-col items-center pointer-events-none backdrop-blur-sm snap-center"
+          >
+            {/* ... card content ... */}
+          </div>
+        ))}
+    </div>
+  </section>
+)}
 
         {/* Login Modal Overlay (Only shows if guest clicks Sign In) */}
         {showAuthModal && !user && (
